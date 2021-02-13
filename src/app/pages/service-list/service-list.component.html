@@ -1,7 +1,7 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-5">
 </div>
 <!-- Page content -->
-<div class="container-fluid mt--7" *ngIf="kongServices$ | async as services">
+<div class="container-fluid mt--7">
   <!-- Table -->
   <div class="row">
     <div class="col">
@@ -14,27 +14,15 @@
                 <th scope="col">Host</th>
                 <th scope="col">Tags</th>
                 <th scope="col">Created</th>
+                <th scope="col">Updated</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="kongServices$ | async as services">
               <tr *ngFor="let service of services.data">
-                 <ng-template #classic let-c="close" let-d="dismiss">
-                   <div class="modal-content">
-                     <div class="modal-header">
-                       <h6 class="modal-title" id="modal-title-default">RAW</h6>
-                       <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
-                         <span aria-hidden="true">×</span>
-                       </button>
-                     </div>
-                     <div class="modal-body">
-                       <pre>{{ service | json }}</pre>
-                     </div>
-                   </div>
-                 </ng-template>
                 <th scope="row">
                   <div class="media align-items-center">
-                    <a href="javascript:void(0)" class="mr-3" (click)="open(classic,'' , '')">
+                    <a href="javascript:void(0)" class="mr-3" (click)="modalRaw(service)">
                       <i class="ni ni-sound-wave"></i>
                     </a>
                     <div class="media-body">
@@ -47,14 +35,13 @@
                 </td>
                 <td>
                   <span class="badge badge-dot mr-4">
-                    <span class="badge badge-pill badge-primary text-uppercase">{{ service.tags }}</span>
+                    <span class="badge badge-pill badge-primary text-uppercase mr-1" *ngFor="let tag of service.tags">{{ tag }}</span>
                   </span>
                 </td>
+                <td>{{ service.created_at | kongDate }}</td>
+                <td>{{ service.updated_at | kongDate }}</td>
                 <td>
-                  {{ service.created_at | kongDate }}
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-3 btn-sm btn-outline-danger" type="button">DELETE</button>
+                  <button class="btn btn-icon btn-3 btn-sm btn-outline-danger" type="button" (click)="modalDelete(service)">DELETE</button>
                 </td>
               </tr>
             </tbody>

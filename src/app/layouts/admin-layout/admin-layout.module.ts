@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { ClipboardModule } from 'ngx-clipboard';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
-import { IconsComponent } from '../../pages/icons/icons.component';
-import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
-import { ServiceListComponent } from '../../pages/service/service-list.component';
+import { ServiceListComponent } from '../../pages/service-list/service-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { KongDatePipe } from 'src/app/shared/pipes/kong-date.pipe';
-// import { ToastrModule } from 'ngx-toastr';
+import { KongDatePipe } from '../../pipes/kong-date.pipe';
+import { ServiceListResolve } from '../../pages/service-list/service-list.resolve';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
@@ -22,15 +21,17 @@ import { KongDatePipe } from 'src/app/shared/pipes/kong-date.pipe';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    ComponentsModule,
   ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
     ServiceListComponent,
-    IconsComponent,
-    MapsComponent,
     KongDatePipe,
+  ],
+  providers: [
+    ServiceListResolve,
   ]
 })
 

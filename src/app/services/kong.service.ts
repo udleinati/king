@@ -14,4 +14,8 @@ export class KongService {
   services() {
     return this.httpClient.request('GET', `${this.urlBase}/services`, { responseType:'json' })
   }
+
+  deleteService(id: string) {
+    return this.httpClient.request('DELETE', `${this.urlBase}/services/${id}`, { responseType:'json' })
+  }
 }

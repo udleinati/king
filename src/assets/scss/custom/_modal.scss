@@ -3,3 +3,14 @@
 //
 
 @import "../core/modals/modal";
+
+.bg-gradient-danger {
+  color: $white;
+}
+
+.bg-gradient-danger .modal-title,
+.bg-gradient-danger .close span,
+.bg-gradient-danger .modal-body,
+.bg-gradient-danger .heading {
+  color: $white;
+}
