@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
+import { Observable } from 'rxjs';
 import { KongService } from 'src/app/services/kong.service';
 
 @Injectable()
@@ -8,7 +9,7 @@ export class ServiceListResolve implements Resolve<Record<string, any>> {
     private readonly kongService: KongService
   ) {}
 
-  resolve(): any {
+  resolve(): Observable<any> {
     return this.kongService.services();
   }
 }

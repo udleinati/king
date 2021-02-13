@@ -9,6 +9,7 @@ import { ModalComponent } from './modal/modal.component';
 import { KeepHtmlPipe } from '../pipes/keep-html.pipe';
 import { LoadingComponent } from './loading/loading.component';
 import { LoadingService } from '../services/loading.service';
+import { SidebarInsideComponent } from './sidebar-inside/sidebar-inside.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { LoadingService } from '../services/loading.service';
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
+    SidebarInsideComponent,
     ModalComponent,
     KeepHtmlPipe,
     LoadingComponent,
@@ -28,6 +30,7 @@ import { LoadingService } from '../services/loading.service';
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
+    SidebarInsideComponent,
     ModalComponent,
     LoadingComponent,
   ],

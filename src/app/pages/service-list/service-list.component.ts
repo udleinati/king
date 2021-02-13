@@ -12,8 +12,8 @@ import { map, switchMap, tap } from "rxjs/operators";
   templateUrl: './service-list.component.html',
 })
 export class ServiceListComponent implements OnInit {
-  kongServices$ = this.activatedRoute.data.pipe(
-    map((data) => data.kongServices)
+  services$ = this.activatedRoute.data.pipe(
+    map((data) => data.services)
   );
   modalRef: NgbModalRef;
 
@@ -46,11 +46,10 @@ export class ServiceListComponent implements OnInit {
     modal.result.then(e => {
       this.kongService.deleteService(content.id).subscribe(
         e => {
-          console.log('e', e );
           this.router.navigate(['services'], { queryParams: { ...this.activatedRoute.snapshot.queryParams, _: Date.now() } });
         },
         error => {
-          console.log('error', error)
+          console.error(error)
           this.router.navigate([], { queryParams: { ...this.activatedRoute.snapshot.queryParams, _: Date.now() } });
         })
     }, reason => {

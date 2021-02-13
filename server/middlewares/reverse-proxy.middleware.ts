@@ -7,11 +7,16 @@ export class ReverseProxyMiddleware implements NestMiddleware {
     pathRewrite: {
       '/api/kong': ''
     },
+    changeOrigin: true,
     secure: false,
     onProxyReq: (proxyReq, req, res) => {
       console.log(
         `[NestMiddleware]: Proxying ${req.method} request originally made to '${req.originalUrl}'...`
       );
+    },
+    onError: (err, req, res) => {
+      console.log('error-----')
+      console.log(err)
     }
   });
 

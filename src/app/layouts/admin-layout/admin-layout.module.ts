@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ClipboardModule } from 'ngx-clipboard';
 
@@ -13,12 +13,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { KongDatePipe } from '../../pipes/kong-date.pipe';
 import { ServiceListResolve } from '../../pages/service-list/service-list.resolve';
 import { ComponentsModule } from '../../components/components.module';
+import { ServicePageComponent } from 'src/app/pages/service-page/service-page.component';
+import { ServicePageResolve } from 'src/app/pages/service-page/service-page.resolve';
+import { ServiceRouteListComponent } from 'src/app/pages/service-page/components/service-route-list.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
     ClipboardModule,
@@ -28,10 +32,13 @@ import { ComponentsModule } from '../../components/components.module';
     DashboardComponent,
     UserProfileComponent,
     ServiceListComponent,
+    ServicePageComponent,
+    ServiceRouteListComponent,
     KongDatePipe,
   ],
   providers: [
     ServiceListResolve,
+    ServicePageResolve,
   ]
 })
 

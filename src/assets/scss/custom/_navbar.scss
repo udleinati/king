@@ -7,3 +7,19 @@
 @import "../core/navbars/navbar-search";
 @import "../core/navbars/navbar-dropdown";
 @import "../core/navbars/navbar-collapse";
+
+#sidenav-inside {
+  position: absolute;
+}
+
+#sidenav-inside .navbar-collapse {
+  &:before {
+    margin: 0px;
+  }
+}
+
+.main-content .navbar-vertical.navbar-expand-md {
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 98%;
+}

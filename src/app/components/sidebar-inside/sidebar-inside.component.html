@@ -1,0 +1,16 @@
+<nav class="card navbar navbar-vertical navbar-expand-md navbar-light bg-white" id="sidenav-inside">
+  <div class="container-fluid">
+    <!-- Collapse -->
+    <div class="collapse navbar-collapse"  id="sidenav-collapse-main">
+      <!-- Navigation -->
+      <ul class="navbar-nav">
+          <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+              <a routerLinkActive="active" [routerLink]="menuItem.routerLink" class="nav-link">
+                  <i class="ni {{menuItem.icon}}"></i>
+                  {{menuItem.title}}
+              </a>
+          </li>
+      </ul>
+    </div>
+  </div>
+</nav>
