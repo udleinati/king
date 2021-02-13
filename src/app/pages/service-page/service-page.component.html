@@ -1,98 +1,85 @@
-<div class="header bg-gradient-danger pb-8 pt-5 pt-md-5">
-</div>
-<div class="container-fluid mt--7">
-  <div class="row">
-    <div class="col-xl-2 order-xl-1 mb-5 mb-xl-0">
-      <app-sidebar-inside [menuItems]="routes"></app-sidebar-inside>
+<div class="card bg-secondary shadow">
+  <div class="card-header bg-white border-0">
+    <div class="row align-items-center">
+      <div class="col-8" >
+        <h3 class="mb-0" *ngIf="service$ | async as service">{{ service.name || 'Add a new service'}}</h3>
+      </div>
     </div>
-    <div class="col-xl-10 order-xl-2">
-      <router-outlet name="inside"></router-outlet>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="serviceForm" #form="ngForm" (ngSubmit)="onSubmit()">
+      <input type="hidden" id="id" formControlName="id">
 
-      <div class="card bg-secondary shadow">
-        <div class="card-header bg-white border-0">
-          <div class="row align-items-center">
-            <div class="col-8" >
-              <h3 class="mb-0" *ngIf="service$ | async as service">{{ service.name || 'Add a new service'}}</h3>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="name">Name</label>
+              <input type="text" id="name" class="form-control form-control-alternative" formControlName="name" [ngClass]="{'is-invalid': serviceForm.controls.name.invalid}">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="tags">Tags</label>
+              <input type="email" id="tags" class="form-control form-control-alternative" formControlName="tags">
             </div>
           </div>
         </div>
-        <div class="card-body">
-          <form [formGroup]="serviceForm" #form="ngForm" (ngSubmit)="onSubmit()">
-            <input type="hidden" id="id" formControlName="id">
-
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="name">Name</label>
-                    <input type="text" id="name" class="form-control form-control-alternative" formControlName="name" [ngClass]="{'is-invalid': serviceForm.controls.name.invalid}">
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="tags">Tags</label>
-                    <input type="email" id="tags" class="form-control form-control-alternative" formControlName="tags">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-5">
-                  <div class="form-group">
-                    <label class="form-control-label" for="host">Host</label>
-                    <input type="text" id="host" class="form-control form-control-alternative" formControlName="host" [ngClass]="{'is-invalid': serviceForm.controls.host.invalid}">
-                  </div>
-                </div>
-                <div class="col-lg-2">
-                  <div class="form-group">
-                    <label class="form-control-label" for="port">Port</label>
-                    <input type="number" id="port" class="form-control form-control-alternative" formControlName="port" [ngClass]="{'is-invalid': serviceForm.controls.port.invalid}">
-                  </div>
-                </div>
-                <div class="col-lg-5">
-                  <div class="form-group">
-                    <label class="form-control-label" for="path">Path</label>
-                    <input type="text" id="path" class="form-control form-control-alternative" formControlName="path" [ngClass]="{'is-invalid': serviceForm.controls.path.invalid}">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label class="form-control-label" for="retries">Retries</label>
-                    <input type="number" id="retries" class="form-control form-control-alternative" formControlName="retries" [ngClass]="{'is-invalid': serviceForm.controls.retries.invalid}">
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label class="form-control-label" for="connectTimeout">Connect Timeout</label>
-                    <input type="number" id="connectTimeout" class="form-control form-control-alternative" formControlName="connectTimeout" [ngClass]="{'is-invalid': serviceForm.controls.connectTimeout.invalid}">
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label class="form-control-label" for="writeTimeout">Write Timeout</label>
-                    <input type="number" id="writeTimeout" class="form-control form-control-alternative" formControlName="writeTimeout" [ngClass]="{'is-invalid': serviceForm.controls.writeTimeout.invalid}">
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <label class="form-control-label" for="readTimeout">Read Timeout</label>
-                    <input type="number" id="readTimeout" class="form-control form-control-alternative" formControlName="readTimeout" [ngClass]="{'is-invalid': serviceForm.controls.readTimeout.invalid}">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <label class="form-control-label" for="clientCertificate">Client Certificate</label>
-                    <input type="text" id="clientCertificate" class="form-control form-control-alternative" formControlName="clientCertificate" [ngClass]="{'is-invalid': serviceForm.controls.clientCertificate.invalid}">
-                  </div>
-                </div>
-              </div>
-
-            <button type="submit" class="btn btn-default float-right" [disabled]="serviceForm.invalid">Submit</button>
-          </form>
+        <div class="row">
+          <div class="col-lg-5">
+            <div class="form-group">
+              <label class="form-control-label" for="host">Host</label>
+              <input type="text" id="host" class="form-control form-control-alternative" formControlName="host" [ngClass]="{'is-invalid': serviceForm.controls.host.invalid}">
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label class="form-control-label" for="port">Port</label>
+              <input type="number" id="port" class="form-control form-control-alternative" formControlName="port" [ngClass]="{'is-invalid': serviceForm.controls.port.invalid}">
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="form-group">
+              <label class="form-control-label" for="path">Path</label>
+              <input type="text" id="path" class="form-control form-control-alternative" formControlName="path" [ngClass]="{'is-invalid': serviceForm.controls.path.invalid}">
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label class="form-control-label" for="retries">Retries</label>
+              <input type="number" id="retries" class="form-control form-control-alternative" formControlName="retries" [ngClass]="{'is-invalid': serviceForm.controls.retries.invalid}">
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label class="form-control-label" for="connectTimeout">Connect Timeout</label>
+              <input type="number" id="connectTimeout" class="form-control form-control-alternative" formControlName="connectTimeout" [ngClass]="{'is-invalid': serviceForm.controls.connectTimeout.invalid}">
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label class="form-control-label" for="writeTimeout">Write Timeout</label>
+              <input type="number" id="writeTimeout" class="form-control form-control-alternative" formControlName="writeTimeout" [ngClass]="{'is-invalid': serviceForm.controls.writeTimeout.invalid}">
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label class="form-control-label" for="readTimeout">Read Timeout</label>
+              <input type="number" id="readTimeout" class="form-control form-control-alternative" formControlName="readTimeout" [ngClass]="{'is-invalid': serviceForm.controls.readTimeout.invalid}">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label class="form-control-label" for="clientCertificate">Client Certificate</label>
+              <input type="text" id="clientCertificate" class="form-control form-control-alternative" formControlName="clientCertificate" [ngClass]="{'is-invalid': serviceForm.controls.clientCertificate.invalid}">
+            </div>
+          </div>
+        </div>
+
+      <button type="submit" class="btn btn-default float-right" [disabled]="serviceForm.invalid">Submit</button>
+    </form>
   </div>
 </div>

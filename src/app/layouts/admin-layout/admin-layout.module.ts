@@ -8,14 +8,15 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
-import { ServiceListComponent } from '../../pages/service-list/service-list.component';
+// import { ServiceListComponent } from '../../pages/service-list/service-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { KongDatePipe } from '../../pipes/kong-date.pipe';
+// import { KongDatePipe } from '../../pipes/kong-date.pipe';
 import { ServiceListResolve } from '../../pages/service-list/service-list.resolve';
 import { ComponentsModule } from '../../components/components.module';
-import { ServicePageComponent } from 'src/app/pages/service-page/service-page.component';
+// import { ServicePageComponent } from 'src/app/pages/service-page/service-page.component';
 import { ServicePageResolve } from 'src/app/pages/service-page/service-page.resolve';
-import { ServiceRouteListComponent } from 'src/app/pages/service-page/components/service-route-list.component';
+// import { ServiceRouteListComponent } from 'src/app/pages/service-page/components/service-route-list.component';
+// import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
@@ -23,18 +24,18 @@ import { ServiceRouteListComponent } from 'src/app/pages/service-page/components
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    NgbModule,
+    // HttpClientModule,
+    // NgbModule,
     ClipboardModule,
-    ComponentsModule,
+    // ComponentsModule,
   ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
-    ServiceListComponent,
-    ServicePageComponent,
-    ServiceRouteListComponent,
-    KongDatePipe,
+    // ServiceListComponent,
+    // ServicePageComponent,
+    // ServiceRouteListComponent,
+    // KongDatePipe,
   ],
   providers: [
     ServiceListResolve,

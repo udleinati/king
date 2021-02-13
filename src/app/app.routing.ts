@@ -17,7 +17,12 @@ const routes: Routes =[
       {
         path: '',
         loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-      }
+      },
+      {
+        path: '',
+        // loadChildren: () => import('./pages/service.module').then(m => m.ServiceModule)
+        loadChildren: './pages/service.module#ServiceModule'
+      },
     ]
   }, {
     path: '**',
