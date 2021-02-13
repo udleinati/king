@@ -14,6 +14,7 @@ import { ComponentsModule } from './components/components.module';
 import { KongService } from './services/kong.service';
 import { LoadingInterceptor } from './interceptors/loading.interceptor'
 import { LoadingService } from './services/loading.service';
+import { sidebarInsideService } from './services/sidebar-inside.service';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { LoadingService } from './services/loading.service';
 
     KongService,
     LoadingService,
+    sidebarInsideService,
   ],
   bootstrap: [AppComponent]
 })

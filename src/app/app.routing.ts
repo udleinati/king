@@ -20,8 +20,7 @@ const routes: Routes =[
       },
       {
         path: '',
-        // loadChildren: () => import('./pages/service.module').then(m => m.ServiceModule)
-        loadChildren: './pages/service.module#ServiceModule'
+        loadChildren: './modules/service/service.module#ServiceModule'
       },
     ]
   }, {

@@ -46,11 +46,14 @@ export class ServiceListComponent implements OnInit {
     modal.result.then(e => {
       this.kongService.deleteService(content.id).subscribe(
         e => {
-          this.router.navigate(['services'], { queryParams: { ...this.activatedRoute.snapshot.queryParams, _: Date.now() } });
+          const queryParams = this.activatedRoute.snapshot.queryParams;
+          this.router.navigate(['services'], { queryParams: { ...queryParams, _: Date.now() } }).then(() => {
+            this.router.navigate(['services'], { queryParams });
+          });
         },
         error => {
           console.error(error)
-          this.router.navigate([], { queryParams: { ...this.activatedRoute.snapshot.queryParams, _: Date.now() } });
+          // this.router.navigate([], { queryParams: { ...this.activatedRoute.snapshot.queryParams, _: Date.now() } });
         })
     }, reason => {
       console.log('reason:', reason)

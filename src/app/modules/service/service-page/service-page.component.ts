@@ -41,11 +41,6 @@ export class ServicePageComponent implements OnInit {
   async ngOnInit() {
     const id = this.activatedRoute.snapshot.params.id || 'new';
 
-    this.routes = [
-      { routerLink: [`/services/${id}`], title: 'Service Detail',  icon:'ni-single-02 text-yellow', class: '' },
-      { routerLink: [`/services/${id}/routes`], title: 'Routes',  icon:'ni-world-2', class: '' },
-    ]
-
     this.service$.subscribe(e => {
       if (!e) return;
 
@@ -78,7 +73,11 @@ export class ServicePageComponent implements OnInit {
     }
 
     obs.subscribe((e: Record<string, any>) => {
-      this.router.navigate(['services', e.id], { queryParams: { ...this.activatedRoute.snapshot.queryParams, _: Date.now() } });
+      const queryParams = this.activatedRoute.snapshot.queryParams;
+
+      this.router.navigate(['services', e.id], { queryParams: { ...queryParams, _: Date.now() } }).then(() => {
+        this.router.navigate(['services', e.id], { queryParams });
+      });
     },
     error => {
       console.error(error)
