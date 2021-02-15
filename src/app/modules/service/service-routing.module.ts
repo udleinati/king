@@ -6,6 +6,7 @@ import { ServiceListComponent } from './service-list/service-list.component';
 import { ServicePageResolve } from './service-page/service-page.resolve';
 import { ServiceListResolve } from './service-list/service-list.resolve';
 import { ServicePageRouteListComponent } from './service-page-route-list/service-page-route-list.component';
+import { ServicePageRouteListResolve } from './service-page-route-list/service-page-route-list.resolve';
 
 const routes: Routes = [
     {
@@ -33,7 +34,10 @@ const routes: Routes = [
             {
               path: ':id/routes',
               component: ServicePageRouteListComponent,
-              resolve: { service: ServicePageResolve },
+              resolve: {
+                service: ServicePageResolve,
+                routes: ServicePageRouteListResolve,
+              },
               runGuardsAndResolvers: 'always',
             },
         ]
@@ -46,6 +50,7 @@ const routes: Routes = [
     providers: [
       ServiceListResolve,
       ServicePageResolve,
+      ServicePageRouteListResolve,
     ]
 })
 export class ServiceRoutingModule { }

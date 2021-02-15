@@ -15,6 +15,8 @@ import { KongService } from './services/kong.service';
 import { LoadingInterceptor } from './interceptors/loading.interceptor'
 import { LoadingService } from './services/loading.service';
 import { sidebarInsideService } from './services/sidebar-inside.service';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './store';
 
 
 @NgModule({
@@ -26,6 +28,8 @@ import { sidebarInsideService } from './services/sidebar-inside.service';
     NgbModule,
     RouterModule,
     AppRoutingModule,
+
+    StoreModule.forRoot(reducer),
   ],
   declarations: [
     AppComponent,

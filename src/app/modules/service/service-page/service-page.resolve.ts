@@ -13,6 +13,7 @@ export class ServicePageResolve implements Resolve<Record<string, any>> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
 
+    console.log('--------xxx')
     if (!route.params.id) {
       this.sidebarInsideService.routes = [
         { path: '/services/new', title: 'Service Detail',  icon:'ni-single-02 text-yellow', class: '' },
@@ -21,7 +22,6 @@ export class ServicePageResolve implements Resolve<Record<string, any>> {
       return of(null);
     }
 
-    console.log('xxxx');
     this.sidebarInsideService.routes = [
       { path: `/services/${route.params.id}`, title: 'Service Detail',  icon:'ni-single-02', class: '' },
       { path: `/services/${route.params.id}/routes`, title: 'Routes',  icon:'ni-world-2', class: '' },

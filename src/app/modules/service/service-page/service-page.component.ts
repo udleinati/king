@@ -39,7 +39,7 @@ export class ServicePageComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    const id = this.activatedRoute.snapshot.params.id || 'new';
+    // const id = this.activatedRoute.snapshot.params.id || 'new';
 
     this.service$.subscribe(e => {
       if (!e) return;

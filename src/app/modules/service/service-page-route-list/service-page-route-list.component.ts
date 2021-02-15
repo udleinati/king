@@ -11,8 +11,8 @@ import { FormBuilder, Validators } from '@angular/forms';
   templateUrl: './service-page-route-list.component.html',
 })
 export class ServicePageRouteListComponent implements OnInit {
-  service$ = this.activatedRoute.data.pipe(
-    map((data) => data.service)
+  routes$ = this.activatedRoute.data.pipe(
+    map((data) => data.routes)
   );
 
   constructor(
