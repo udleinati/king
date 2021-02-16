@@ -3,8 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
-import { KongService } from 'src/app/services/kong.service';
+import { KongService } from 'src/app/shared/services/kong.service';
 import { map, switchMap, tap } from "rxjs/operators";
+import { select, Store } from '@ngrx/store';
+import * as fromService from 'src/app/store/service';
+import { Actions, ofType } from '@ngrx/effects';
 
 @Component({
   providers:[ModalComponent],
@@ -12,19 +15,22 @@ import { map, switchMap, tap } from "rxjs/operators";
   templateUrl: './service-list.component.html',
 })
 export class ServiceListComponent implements OnInit {
-  services$ = this.activatedRoute.data.pipe(
-    map((data) => data.services)
-  );
+  public services$ = this.store.pipe(select(fromService.getServicesPayload));
   modalRef: NgbModalRef;
 
   constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
+    private store: Store,
+    private actions$: Actions,
     private modalService: NgbModal,
-    private readonly kongService: KongService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.actions$.pipe(
+      ofType<fromService.RemoveSuccess>(fromService.REMOVE_SUCCESS),
+    ).subscribe(() => {
+      this.store.dispatch(new fromService.List())
+    })
+  }
 
   modalRaw(content) {
     const modal = this.modalService.open(<Component>ModalComponent, { centered: true });
@@ -44,17 +50,7 @@ export class ServiceListComponent implements OnInit {
     modal.componentInstance.cancelLabel = 'Cancel'
     modal.componentInstance.content = content
     modal.result.then(e => {
-      this.kongService.deleteService(content.id).subscribe(
-        e => {
-          const queryParams = this.activatedRoute.snapshot.queryParams;
-          this.router.navigate(['services'], { queryParams: { ...queryParams, _: Date.now() } }).then(() => {
-            this.router.navigate(['services'], { queryParams });
-          });
-        },
-        error => {
-          console.error(error)
-          // this.router.navigate([], { queryParams: { ...this.activatedRoute.snapshot.queryParams, _: Date.now() } });
-        })
+      this.store.dispatch(new fromService.Remove(content.id));
     }, reason => {
       console.log('reason:', reason)
     })

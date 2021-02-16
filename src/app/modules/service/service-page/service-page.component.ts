@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
-import { KongService } from 'src/app/services/kong.service';
-import { map } from "rxjs/operators";
 import { FormBuilder, Validators } from '@angular/forms';
+import { select, Store } from '@ngrx/store';
+import * as fromService from 'src/app/store/service';
+import { Actions, ofType } from '@ngrx/effects';
 
 @Component({
   providers:[ModalComponent],
@@ -11,6 +12,8 @@ import { FormBuilder, Validators } from '@angular/forms';
   templateUrl: './service-page.component.html',
 })
 export class ServicePageComponent implements OnInit {
+  public service$ = this.store.pipe(select(fromService.getServicePayload));
+
   routes: Record<string, any>[];
 
   serviceForm = this.fb.group({
@@ -27,22 +30,25 @@ export class ServicePageComponent implements OnInit {
     clientCertificate: [undefined],
   })
 
-  service$ = this.activatedRoute.data.pipe(
-    map((data) => data.service)
-  );
-
   constructor(
+    private store: Store,
+    private actions$: Actions,
     private fb: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private readonly kongService: KongService
-  ) { }
+  ) {
+  }
 
   async ngOnInit() {
-    // const id = this.activatedRoute.snapshot.params.id || 'new';
+    this.actions$.pipe(
+      ofType<fromService.AddSuccess>(fromService.ADD_SUCCESS),
+    ).subscribe(action => {
+      this.router.navigateByUrl(`/services/${action.payload.id}`)
+    })
 
-    this.service$.subscribe(e => {
-      if (!e) return;
+    this.service$.subscribe((e: Record<string, any>) => {
+      if (!this.activatedRoute.snapshot.params.id) return;
+      console.log(e)
 
       this.serviceForm.setValue({
         id: e.id,
@@ -64,23 +70,10 @@ export class ServicePageComponent implements OnInit {
     const value = this.serviceForm.value;
     if (!value.clientCertificate) value.clientCertificate = null;
 
-    let obs;
-
     if (value.id) {
-      obs = this.kongService.patchService(value.id, value);
+      this.store.dispatch(new fromService.Update(value.id, value));
     } else {
-      obs = this.kongService.addService(value)
+      this.store.dispatch(new fromService.Add(value));
     }
-
-    obs.subscribe((e: Record<string, any>) => {
-      const queryParams = this.activatedRoute.snapshot.queryParams;
-
-      this.router.navigate(['services', e.id], { queryParams: { ...queryParams, _: Date.now() } }).then(() => {
-        this.router.navigate(['services', e.id], { queryParams });
-      });
-    },
-    error => {
-      console.error(error)
-    })
   }
 }

@@ -11,13 +11,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
-import { KongService } from './services/kong.service';
+import { KongService } from './shared/services/kong.service';
 import { LoadingInterceptor } from './interceptors/loading.interceptor'
-import { LoadingService } from './services/loading.service';
-import { sidebarInsideService } from './services/sidebar-inside.service';
+import { LoadingService } from './shared/services/loading.service';
+import { sidebarInsideService } from './shared/services/sidebar-inside.service';
 import { StoreModule } from '@ngrx/store';
-import { reducer } from './store';
+import { reducers, effects } from './store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+const APP_ID = 'king';
 
 @NgModule({
   imports: [
@@ -29,7 +32,9 @@ import { reducer } from './store';
     RouterModule,
     AppRoutingModule,
 
-    StoreModule.forRoot(reducer),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot(effects),
+    StoreDevtoolsModule.instrument({ name: APP_ID, logOnly: false })
   ],
   declarations: [
     AppComponent,

@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { KongService } from 'src/app/services/kong.service';
-import * as serviceActions from 'src/app/store/service/service.actions';
+import { filter, take, tap } from 'rxjs/operators';
+import * as fromService from 'src/app/store/service';
 
 @Injectable()
 export class ServiceListResolve implements Resolve<Record<string, any>> {
-  constructor(
-    private store: Store,
-    private readonly kongService: KongService
-  ) {}
+  constructor(private store: Store) {}
 
   resolve(): Observable<any> {
-    this.store.dispatch(new serviceActions.List())
-    return this.kongService.services();
+    this.store.dispatch(new fromService.List())
+
+    return this.store.pipe(
+      select(fromService.getServicesState),
+      filter(state => !state.isLoading && state.loaded),
+      take(1)
+    )
   }
 }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { sidebarInsideService } from 'src/app/services/sidebar-inside.service';
+import { sidebarInsideService } from 'src/app/shared/services/sidebar-inside.service';
 
 // declare interface RouteInfo {
 //     routeLink: string[];

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
-import { KongService } from 'src/app/services/kong.service';
+import { KongService } from 'src/app/shared/services/kong.service';
 
 @Injectable()
 export class ServicePageRouteListResolve implements Resolve<Record<string, any>> {

@@ -1,32 +1,42 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { KongService } from 'src/app/services/kong.service';
-import { sidebarInsideService } from 'src/app/services/sidebar-inside.service';
+import { filter, take } from 'rxjs/operators';
+import { sidebarInsideService } from 'src/app/shared/services/sidebar-inside.service';
+import * as fromService from 'src/app/store/service';
 
 @Injectable()
 export class ServicePageResolve implements Resolve<Record<string, any>> {
   constructor(
-    private readonly kongService: KongService,
-    private readonly sidebarInsideService: sidebarInsideService,
+    private store: Store,
+    // private readonly sidebarInsideService: sidebarInsideService,
   ) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
 
-    console.log('--------xxx')
-    if (!route.params.id) {
-      this.sidebarInsideService.routes = [
-        { path: '/services/new', title: 'Service Detail',  icon:'ni-single-02 text-yellow', class: '' },
-      ];
+    if (!route.params.id) return of(null);
 
-      return of(null);
-    }
+    //   this.sidebarInsideService.routes = [
+    //     { path: '/services/new', title: 'Service Detail',  icon:'ni-single-02 text-yellow', class: '' },
+    //   ];
 
-    this.sidebarInsideService.routes = [
-      { path: `/services/${route.params.id}`, title: 'Service Detail',  icon:'ni-single-02', class: '' },
-      { path: `/services/${route.params.id}/routes`, title: 'Routes',  icon:'ni-world-2', class: '' },
-    ];
+    //   this.store.dispatch(new fromService.Get(route.params.id))
 
-    return this.kongService.service(route.params.id);
+    //   return of(null);
+    // }
+
+    // this.sidebarInsideService.routes = [
+    //   { path: `/services/${route.params.id}`, title: 'Service Detail',  icon:'ni-single-02', class: '' },
+    //   { path: `/services/${route.params.id}/routes`, title: 'Routes',  icon:'ni-world-2', class: '' },
+    // ];
+
+    this.store.dispatch(new fromService.Get(route.params.id))
+
+    return this.store.pipe(
+      select(fromService.getServiceState),
+      filter(state => !state.isLoading && state.loaded),
+      take(1)
+    )
   }
 }

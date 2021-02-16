@@ -28,20 +28,27 @@ export class KongService {
     )
   }
 
-  deleteService(id: string) {
+  removeService(id: string) {
     return this.httpClient.delete(`${this.urlBase}/services/${id}`, { responseType: 'json' })
   }
 
   patchService(id: string, body: Record<string, any>) {
-    return this.httpClient.patch(`${this.urlBase}/services/${id}`, snakeCase(body, { deep: true }), { responseType: 'json' })
+    return this.httpClient.patch(`${this.urlBase}/services/${id}`, snakeCase(body, { deep: true }), { responseType: 'json' }).pipe(
+      map(e => camelCase(e, { deep: true }))
+    )
   }
 
   addService(body: Record<string, any>) {
-    Object.keys(body).forEach(e => {
-      if (!body[e]) delete body[e]
-    })
+    const newBody = {}
 
-    return this.httpClient.post(`${this.urlBase}/services`, snakeCase(body, { deep: true }), { responseType: 'json' })
+    /* create newBody without id property */
+    Object.keys(body).filter(e => !['id'].includes(e)).forEach(e => {
+      if (body[e]) newBody[e] = body[e];
+    });
+
+    return this.httpClient.post(`${this.urlBase}/services`, snakeCase(newBody, { deep: true }), { responseType: 'json' }).pipe(
+      map(e => camelCase(e, { deep: true }))
+    )
   }
 
   serviceRoutes(id: string) {
