@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import * as fromService from 'src/app/store/service';
 import { Actions, ofType } from '@ngrx/effects';
+import { PageContentExtend } from 'src/app/shared/components/page-content/page-content.extend';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   providers:[ModalComponent],
   selector: 'app-service-page',
   templateUrl: './service-page.component.html',
 })
-export class ServicePageComponent implements OnInit {
+export class ServicePageComponent extends PageContentExtend implements OnInit {
   public service$ = this.store.pipe(select(fromService.getServicePayload));
 
-  routes: Record<string, any>[];
-
-  serviceForm = this.fb.group({
+  pageForm = this.fb.group({
     id: [undefined],
     name: [null, Validators.required],
     tags: [undefined],
@@ -30,27 +30,20 @@ export class ServicePageComponent implements OnInit {
     clientCertificate: [undefined],
   })
 
-  constructor(
-    private store: Store,
-    private actions$: Actions,
-    private fb: FormBuilder,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-  ) {
-  }
-
   async ngOnInit() {
+    super.ngOnInit();
+
     this.actions$.pipe(
+      takeUntil(this._unsubscribeAll),
       ofType<fromService.AddSuccess>(fromService.ADD_SUCCESS),
     ).subscribe(action => {
       this.router.navigateByUrl(`/services/${action.payload.id}`)
     })
 
     this.service$.subscribe((e: Record<string, any>) => {
-      if (!this.activatedRoute.snapshot.params.id) return;
-      console.log(e)
+      if (!e || !this.activatedRoute.snapshot.params.id) return;
 
-      this.serviceForm.setValue({
+      this.pageForm.setValue({
         id: e.id,
         name: e.name,
         tags: e.tags,
@@ -67,7 +60,7 @@ export class ServicePageComponent implements OnInit {
   }
 
   onSubmit() {
-    const value = this.serviceForm.value;
+    const value = this.pageForm.value;
     if (!value.clientCertificate) value.clientCertificate = null;
 
     if (value.id) {

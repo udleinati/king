@@ -12,7 +12,7 @@ import { ServiceListComponent } from './service-list/service-list.component';
 import { KongDatePipe } from '../../shared/pipes/kong-date.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ComponentsModule } from '../../components/components.module';
+import { ComponentsModule } from '../../shared/components/components.module';
 import { ServicePageRouteListComponent } from './service-page-route-list/service-page-route-list.component';
 
 

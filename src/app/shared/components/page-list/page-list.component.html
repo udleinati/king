@@ -1,0 +1,171 @@
+<div id="page-list" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent"
+      fxLayout="column" fxLayoutAlign="center center"
+      fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
+
+      <!-- APP TITLE -->
+      <div class="logo mb-24 mb-md-0"
+        xLayout="row" fxLayoutAlign="start center">
+        <mat-icon *ngIf="headerIcon" class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          {{ headerIcon }}
+        </mat-icon>
+        <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          {{ headerTitle }}
+        </span>
+      </div>
+      <!-- / APP TITLE -->
+
+      <!-- SEARCH -->
+      <div *ngIf="!hideSearch" class="search-wrapper mx-32 mx-md-0">
+        <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>search</mat-icon>
+          <input #filter placeholder="Search for a {{ objectName }}">
+        </div>
+      </div>
+
+      <div *ngIf="!hideDragAndDrop" class="mx-32 mx-md-0">
+        <button mat-raised-button
+          class="add-product-button mt-24 mt-md-0" (click)="toggleDisplayReorder()">
+          <span *ngIf="displayReorder === false">Enable Reorder</span>
+          <span *ngIf="displayReorder === true">Disable Reorder</span>
+        </button>
+      </div>
+
+
+      <!-- / SEARCH -->
+
+      <!-- ADD BUTTON -->
+      <button *ngIf="!hideAdd" mat-raised-button
+        [routerLink]="['new']"
+        class="add-product-button fuse-white mt-24 mt-md-0">
+        <span>ADD {{ objectName | uppercase }}</span>
+      </button>
+      <!-- / ADD BUTTON -->
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+      <mat-table class="products-table" #table
+        mat-table [dataSource]="getListState().data"
+        cdkDropList
+        [cdkDropListData]="getListState().data"
+        (cdkDropListDropped)="emitDropEvent($event)"
+        [cdkDropListDisabled]="!displayReorder"
+        fusePerfectScrollbar>
+
+        <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+          <ng-container *ngIf="!['position', 'id', 'name', 'enabled', 'status', 'createdAt', 'updatedAt'].includes(column)">
+            <!-- GENERIC -->
+            <mat-header-cell *matHeaderCellDef>{{column | uppercase}}</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <p class="text-truncate" *ngIf="(element.attributes[column] | isObject)">{{element.attributes[column].pt}}</p>
+              <p class="text-truncate" *ngIf="!(element.attributes[column] | isObject)">{{element.attributes[column]}}</p>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container *ngIf="['position'].includes(column)">
+            <!-- POSITION -->
+            <mat-header-cell *matHeaderCellDef>{{column | uppercase}}</mat-header-cell>
+            <mat-cell *matCellDef="let element"
+              [ngStyle]="{'pointer-events': (displayReorder) ? 'all': 'none' }"
+              cdkDragHandle>
+              <mat-icon>drag_handle</mat-icon>
+              <!-- style="pointer-events: all;" cdkDragHandle -->
+            </mat-cell>
+          </ng-container>
+
+          <ng-container *ngIf="['id'].includes(column)">
+            <!-- ID -->
+            <mat-header-cell *matHeaderCellDef>{{column | uppercase}}</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <p class="text-truncate">{{element.id}}</p>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container *ngIf="['name'].includes(column)">
+            <!-- NAME -->
+            <mat-header-cell *matHeaderCellDef>{{column | uppercase}}</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+
+              <ng-template #level>
+                <ng-container *ngIf="element.attributes.level > 1">
+                  <label *ngFor="let i of counter(element.attributes.level - 1)">-&gt; </label>
+                </ng-container>
+              </ng-template>
+
+              <p class="text-truncate" *ngIf="(element.attributes[column] | isObject)">
+                <ng-container *ngTemplateOutlet="level"></ng-container>
+                {{element.attributes[column].pt}}
+              </p>
+
+              <p class="text-truncate" *ngIf="!(element.attributes[column] | isObject)">{{element.attributes[column]}}</p>
+            </mat-cell>
+          </ng-container>
+
+          <!-- BOOLEAN -->
+          <ng-container *ngIf="['enabled'].includes(column)">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <mat-icon *ngIf="!element.attributes[column]" class="active-icon red-500 s-16">close</mat-icon>
+              <mat-icon *ngIf="element.attributes[column]" class="active-icon green-600 s-16">check</mat-icon>
+            </mat-cell>
+          </ng-container>
+
+          <!-- STATUS -->
+          <ng-container *ngIf="['status'].includes(column)">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <mat-icon *ngIf="['active', 'confirmed'].includes(element.attributes[column])" class="active-icon green-600 s-16">check</mat-icon>
+              <mat-icon *ngIf="element.attributes[column] === 'inactive'" class="active-icon red-500 s-16">close</mat-icon>
+              <mat-icon *ngIf="['unconfirmed', 'archived'].includes(element.attributes[column])" class="active-icon grey-400 s-16">remove_circle_outline</mat-icon>
+            </mat-cell>
+          </ng-container>
+
+          <!-- DATE TIME -->
+          <ng-container *ngIf="['createdAt', 'updatedAt'].includes(column)">
+            <mat-header-cell *matHeaderCellDef>{{column | uppercase}}</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <p class="text-truncate">{{ element.attributes[column] | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
+            </mat-cell>
+          </ng-container>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="getDisplayedColumns(); sticky:true"></mat-header-row>
+
+        <mat-row *matRowDef="let element; columns: getDisplayedColumns();"
+          class="product"
+          matRipple
+          cdkDrag [cdkDragData]="row"
+          [ngStyle]="{'pointer-events': (displayReorder) ? 'none': 'auto' }"
+          [routerLink]="[element.id]">
+        </mat-row>
+        <!-- style="pointer-events: none;" -->
+
+      </mat-table>
+
+      <mat-paginator *ngIf="!hidePagination" #paginator
+        [length]="getListState().meta.totalResources"
+        [pageSize]="getListState().meta.pageSize"
+        [pageIndex]="getListState().meta.page - 1"
+        [pageSizeOptions]="[100, 250, 500]"
+        [showFirstLastButtons]="true"
+        (page)="pageEvent = getServerData($event)">
+      </mat-paginator>
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+  <!-- / CENTER -->
+
+</div>

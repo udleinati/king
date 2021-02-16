@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { KongService } from 'src/app/shared/services/kong.service';
 import { map } from "rxjs/operators";
 import { FormBuilder, Validators } from '@angular/forms';

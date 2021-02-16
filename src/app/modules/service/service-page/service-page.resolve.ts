@@ -10,33 +10,31 @@ import * as fromService from 'src/app/store/service';
 export class ServicePageResolve implements Resolve<Record<string, any>> {
   constructor(
     private store: Store,
-    // private readonly sidebarInsideService: sidebarInsideService,
+    private readonly sidebarInsideService: sidebarInsideService,
   ) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
+    if (!route.params.id) {
+      this.sidebarInsideService.routes = [
+        { path: '/services/new', title: 'Service',  icon:'ni-single-02 text-yellow', class: '' },
+      ];
 
-    if (!route.params.id) return of(null);
+      return of(null)
+    }
 
-    //   this.sidebarInsideService.routes = [
-    //     { path: '/services/new', title: 'Service Detail',  icon:'ni-single-02 text-yellow', class: '' },
-    //   ];
+    else {
+      this.sidebarInsideService.routes = [
+        { path: `/services/${route.params.id}`, title: 'Service',  icon:'ni-single-02', class: '' },
+        { path: `/services/${route.params.id}/routes`, title: 'Routes',  icon:'ni-world-2', class: '' },
+      ];
 
-    //   this.store.dispatch(new fromService.Get(route.params.id))
+      this.store.dispatch(new fromService.Get(route.params.id))
 
-    //   return of(null);
-    // }
-
-    // this.sidebarInsideService.routes = [
-    //   { path: `/services/${route.params.id}`, title: 'Service Detail',  icon:'ni-single-02', class: '' },
-    //   { path: `/services/${route.params.id}/routes`, title: 'Routes',  icon:'ni-world-2', class: '' },
-    // ];
-
-    this.store.dispatch(new fromService.Get(route.params.id))
-
-    return this.store.pipe(
-      select(fromService.getServiceState),
-      filter(state => !state.isLoading && state.loaded),
-      take(1)
-    )
+      return this.store.pipe(
+        select(fromService.getServiceState),
+        filter(state => !state.isLoading && state.loaded),
+        take(1)
+      )
+    }
   }
 }

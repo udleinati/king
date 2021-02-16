@@ -7,14 +7,14 @@
     </div>
   </div>
   <div class="card-body">
-    <form [formGroup]="serviceForm" #form="ngForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="pageForm" #form="ngForm" (ngSubmit)="onSubmit()">
       <input type="hidden" id="id" formControlName="id">
 
         <div class="row">
           <div class="col-lg-6">
             <div class="form-group">
               <label class="form-control-label" for="name">Name</label>
-              <input type="text" id="name" class="form-control form-control-alternative" formControlName="name" [ngClass]="{'is-invalid': serviceForm.controls.name.invalid}">
+              <input type="text" id="name" class="form-control form-control-alternative" formControlName="name" [ngClass]="{'is-invalid': pageForm.controls.name.invalid}">
             </div>
           </div>
           <div class="col-lg-6">
@@ -28,19 +28,19 @@
           <div class="col-lg-5">
             <div class="form-group">
               <label class="form-control-label" for="host">Host</label>
-              <input type="text" id="host" class="form-control form-control-alternative" formControlName="host" [ngClass]="{'is-invalid': serviceForm.controls.host.invalid}">
+              <input type="text" id="host" class="form-control form-control-alternative" formControlName="host" [ngClass]="{'is-invalid': pageForm.controls.host.invalid}">
             </div>
           </div>
           <div class="col-lg-2">
             <div class="form-group">
               <label class="form-control-label" for="port">Port</label>
-              <input type="number" id="port" class="form-control form-control-alternative" formControlName="port" [ngClass]="{'is-invalid': serviceForm.controls.port.invalid}">
+              <input type="number" id="port" class="form-control form-control-alternative" formControlName="port" [ngClass]="{'is-invalid': pageForm.controls.port.invalid}">
             </div>
           </div>
           <div class="col-lg-5">
             <div class="form-group">
               <label class="form-control-label" for="path">Path</label>
-              <input type="text" id="path" class="form-control form-control-alternative" formControlName="path" [ngClass]="{'is-invalid': serviceForm.controls.path.invalid}">
+              <input type="text" id="path" class="form-control form-control-alternative" formControlName="path" [ngClass]="{'is-invalid': pageForm.controls.path.invalid}">
             </div>
           </div>
         </div>
@@ -48,25 +48,25 @@
           <div class="col-lg-3">
             <div class="form-group">
               <label class="form-control-label" for="retries">Retries</label>
-              <input type="number" id="retries" class="form-control form-control-alternative" formControlName="retries" [ngClass]="{'is-invalid': serviceForm.controls.retries.invalid}">
+              <input type="number" id="retries" class="form-control form-control-alternative" formControlName="retries" [ngClass]="{'is-invalid': pageForm.controls.retries.invalid}">
             </div>
           </div>
           <div class="col-lg-3">
             <div class="form-group">
               <label class="form-control-label" for="connectTimeout">Connect Timeout</label>
-              <input type="number" id="connectTimeout" class="form-control form-control-alternative" formControlName="connectTimeout" [ngClass]="{'is-invalid': serviceForm.controls.connectTimeout.invalid}">
+              <input type="number" id="connectTimeout" class="form-control form-control-alternative" formControlName="connectTimeout" [ngClass]="{'is-invalid': pageForm.controls.connectTimeout.invalid}">
             </div>
           </div>
           <div class="col-lg-3">
             <div class="form-group">
               <label class="form-control-label" for="writeTimeout">Write Timeout</label>
-              <input type="number" id="writeTimeout" class="form-control form-control-alternative" formControlName="writeTimeout" [ngClass]="{'is-invalid': serviceForm.controls.writeTimeout.invalid}">
+              <input type="number" id="writeTimeout" class="form-control form-control-alternative" formControlName="writeTimeout" [ngClass]="{'is-invalid': pageForm.controls.writeTimeout.invalid}">
             </div>
           </div>
           <div class="col-lg-3">
             <div class="form-group">
               <label class="form-control-label" for="readTimeout">Read Timeout</label>
-              <input type="number" id="readTimeout" class="form-control form-control-alternative" formControlName="readTimeout" [ngClass]="{'is-invalid': serviceForm.controls.readTimeout.invalid}">
+              <input type="number" id="readTimeout" class="form-control form-control-alternative" formControlName="readTimeout" [ngClass]="{'is-invalid': pageForm.controls.readTimeout.invalid}">
             </div>
           </div>
         </div>
@@ -74,12 +74,12 @@
           <div class="col-lg-12">
             <div class="form-group">
               <label class="form-control-label" for="clientCertificate">Client Certificate</label>
-              <input type="text" id="clientCertificate" class="form-control form-control-alternative" formControlName="clientCertificate" [ngClass]="{'is-invalid': serviceForm.controls.clientCertificate.invalid}">
+              <input type="text" id="clientCertificate" class="form-control form-control-alternative" formControlName="clientCertificate" [ngClass]="{'is-invalid': pageForm.controls.clientCertificate.invalid}">
             </div>
           </div>
         </div>
 
-      <button type="submit" class="btn btn-default float-right" [disabled]="serviceForm.invalid">Submit</button>
+      <button type="submit" class="btn btn-default float-right" [disabled]="pageForm.invalid">Submit</button>
     </form>
   </div>
 </div>

@@ -1,0 +1,78 @@
+<div id="page-content" class="page-layout carded fullwidth inner-scroll">
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="!hideHeader">
+      <!-- APP TITLE -->
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="['..']">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+
+        <div class="product-image mr-8 mr-sm-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          <img *ngIf="!image" [src]="'assets/images/ecommerce/product-image-placeholder.png'">
+          <img *ngIf="image" [src]="image | dimension:'100x100' | slug:'panel'">
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="start start"
+          [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+        <div class="h2" *ngIf="formState.value.id">
+          <ng-container *ngIf="!(name | isObject)">{{ name }}</ng-container>
+          <ng-container *ngIf="(name | isObject)">{{ name.pt }}</ng-container>
+        </div>
+        <div class="h2" *ngIf="!formState.value.id">
+          New {{objectName}}
+        </div>
+        <div class="subtitle secondary-text" *ngIf="formState.value.id">
+          <span>Created at {{ formState.value.createdAt | date: 'dd/MM/yyyy HH:mm:ss' }} and Updated at {{ formState.value.updatedAt | date: 'dd/MM/yyyy HH:mm:ss' }}</span>
+        </div>
+        <div class="subtitle secondary-text" *ngIf="!formState.value.id">
+          <span>Fill the {{objectName}} detail</span>
+        </div>
+        </div>
+      </div>
+      <!-- / APP TITLE -->
+
+      <a *ngIf="!hideNew" mat-button [routerLink]="['../new']">Add new {{ objectName }}</a>
+
+      <ng-container *ngIf="!formState.isSubmitted && !hideSave">
+        <button mat-raised-button  class="save-product-button" *ngIf="!formState.value.id"
+          [disabled]="formState.isPristine || formState.isInvalid"
+          form="formState">
+          <span>ADD</span>
+        </button>
+
+        <button mat-raised-button class="save-product-button" *ngIf="formState.value.id"
+          [disabled]="formState.isPristine || formState.isInvalid"
+          form="formState">
+          <span>SAVE</span>
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="formState.isSubmitted">
+        <button mat-raised-button color="primary">
+          <span>SAVING...</span>
+        </button>
+      </ng-container>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+      <!-- CONTENT -->
+      <div class="content">
+
+    <ng-content></ng-content>
+
+      </div>
+      <!-- / CONTENT -->
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+</div>

@@ -10,7 +10,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app.routing';
-import { ComponentsModule } from './components/components.module';
+import { ComponentsModule } from './shared/components/components.module';
 import { KongService } from './shared/services/kong.service';
 import { LoadingInterceptor } from './interceptors/loading.interceptor'
 import { LoadingService } from './shared/services/loading.service';
