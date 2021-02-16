@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
-import { FormBuilder, Validators } from '@angular/forms';
-import { select, Store } from '@ngrx/store';
+import { Validators } from '@angular/forms';
+import { select } from '@ngrx/store';
 import * as fromService from 'src/app/store/service';
-import { Actions, ofType } from '@ngrx/effects';
+import { ofType } from '@ngrx/effects';
 import { PageContentExtend } from 'src/app/shared/components/page-content/page-content.extend';
 import { takeUntil } from 'rxjs/operators';
 

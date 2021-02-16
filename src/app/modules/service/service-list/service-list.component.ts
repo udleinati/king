@@ -1,13 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ModalDismissReasons, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
-import { KongService } from 'src/app/shared/services/kong.service';
-import { map, switchMap, takeUntil, tap } from "rxjs/operators";
-import { select, Store } from '@ngrx/store';
+import { takeUntil, tap } from "rxjs/operators";
+import { select } from '@ngrx/store';
 import * as fromService from 'src/app/store/service';
-import { Actions, ofType } from '@ngrx/effects';
+import { ofType } from '@ngrx/effects';
 import { PageListExtend } from 'src/app/shared/components/page-list/page-list.extend';
 
 @Component({
@@ -17,7 +13,8 @@ import { PageListExtend } from 'src/app/shared/components/page-list/page-list.ex
 })
 export class ServiceListComponent extends PageListExtend implements OnInit {
   public list$ = this.store.pipe(select(fromService.getServicesPayload));
-  public displayedColumns: string[] = ['name', 'host', 'tags', 'createdAt', 'updatedAt'];
+  public columns: string[] = ['name', 'host', 'tags', 'createdAt', 'updatedAt'];
+  public columnActions: string[] = ['delete'];
 
   protected deleteMessage = 'You are about to delete the service <strong>{{name}}</strong>';
   protected fromStore = fromService;
