@@ -13,11 +13,11 @@ import { PageListExtend } from 'src/app/shared/components/page-list/page-list.ex
 })
 export class ServiceListComponent extends PageListExtend implements OnInit {
   public list$ = this.store.pipe(select(fromService.getServicesPayload));
-  public columns: string[] = ['name', 'host', 'tags', 'createdAt', 'updatedAt'];
+  public columns: string[] = ['name', 'host', 'tags'];
   public columnActions: string[] = ['delete'];
 
-  protected deleteMessage = 'You are about to delete the service <strong>{{name}}</strong>';
-  protected fromStore = fromService;
+  public deleteMessage = 'You are about to delete the service <strong>{{name}}</strong>';
+  public fromStore = fromService;
 
   ngOnInit() {
     super.ngOnInit();

@@ -1,63 +1,11 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-5">
 </div>
-<!-- Page content -->
-<div class="container-fluid mt--7">
-  <!-- Table -->
-  <div class="row">
-    <div class="col">
-      <div class="card shadow">
-        <div class="table-responsive">
-          <table class="table align-items-center table-flush">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col" *ngFor="let column of columns">{{ column }}</th>
-                <th scope="col" *ngIf="columnActions.length">Action</th>
-              </tr>
-            </thead>
-            <tbody *ngIf="list$ | async as list">
-              <tr *ngFor="let item of list.data">
-                <ng-container *ngFor="let column of columns">
-                  <ng-container *ngIf="['name'].includes(column)">
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <a href="javascript:void(0)" class="mr-3" (click)="modalRaw(item)">
-                          <i class="ni ni-sound-wave"></i>
-                        </a>
-                        <div class="media-body">
-                          <a href="javascript:void(0)" class="mr-3" [routerLink]="[item.id]">
-                            <span class="mb-0 text-sm">{{ item[column] }}</span>
-                          </a>
-                        </div>
-                      </div>
-                    </th>
-                  </ng-container>
 
-                  <ng-container *ngIf="['host'].includes(column)">
-                    <td>
-                      {{ item[column] }}
-                    </td>
-                  </ng-container>
-
-                  <ng-container *ngIf="['tags'].includes(column)">
-                    <td>
-                      <span class="badge badge-dot mr-4">
-                        <span class="badge badge-pill badge-primary text-uppercase mr-1" *ngFor="let sItem of item[column]">{{ sItem }}</span>
-                      </span>
-                    </td>
-                  </ng-container>
-
-                  <ng-container *ngIf="['createdAt', 'updatedAt'].includes(column)">
-                    <td>{{ item[column] | kongDate }}</td>
-                  </ng-container>
-                </ng-container>
-                <td *ngIf="columnActions.length">
-                  <button *ngIf="columnActions.includes('delete')" class="btn btn-icon btn-3 btn-sm btn-outline-danger" type="button" (click)="modalDelete(item)">DELETE</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<app-page-list *ngIf="list$ | async as list"
+  classes="mt--7"
+  [columns]="columns"
+  [columnActions]="columnActions"
+  [list]="list"
+  [fromStore]="fromStore"
+  [deleteMessage]="deleteMessage">
+</app-page-list>

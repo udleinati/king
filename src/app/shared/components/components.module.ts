@@ -4,13 +4,14 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
-import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modal/modal.component';
 import { KeepHtmlPipe } from '../pipes/keep-html.pipe';
 import { LoadingComponent } from './loading/loading.component';
 import { LoadingService } from '../services/loading.service';
 import { SidebarInsideComponent } from './sidebar-inside/sidebar-inside.component';
 import { PageListComponent } from './page-list/page-list.component';
+import { KongDatePipe } from '../pipes/kong-date.pipe';
 
 @NgModule({
   imports: [
@@ -27,6 +28,8 @@ import { PageListComponent } from './page-list/page-list.component';
     KeepHtmlPipe,
     LoadingComponent,
     PageListComponent,
+
+    KongDatePipe,
   ],
   exports: [
     FooterComponent,
@@ -38,7 +41,7 @@ import { PageListComponent } from './page-list/page-list.component';
     PageListComponent,
   ],
   providers: [
-    LoadingService
+    LoadingService,
   ]
 })
 export class ComponentsModule { }

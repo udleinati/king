@@ -17,6 +17,7 @@ export class KongService {
   }
 
   services() {
+    console.log('--services');
     return this.httpClient.get(`${this.urlBase}/services`, { responseType: 'json' }).pipe(
       map(e => camelCase(e, { deep: true }))
     )
@@ -51,8 +52,23 @@ export class KongService {
     )
   }
 
-  serviceRoutes(id: string) {
-    return this.httpClient.get(`${this.urlBase}/services/${id}/routes`, { responseType: 'json' }).pipe(
+  // serviceRoutes(id: string) {
+  //   return this.httpClient.get(`${this.urlBase}/services/${id}/routes`, { responseType: 'json' }).pipe(
+  //     map(e => camelCase(e, { deep: true }))
+  //   )
+  // }
+
+  routes(serviceId: string) {
+    console.log('routes---');
+    const path = (serviceId) ? `/services/${serviceId}/routes` : '/routes';
+
+    return this.httpClient.get(`${this.urlBase}${path}`, { responseType: 'json' }).pipe(
+      map(e => camelCase(e, { deep: true }))
+    )
+  }
+
+  route(id: string) {
+    return this.httpClient.get(`${this.urlBase}/routes/${id}`, { responseType: 'json' }).pipe(
       map(e => camelCase(e, { deep: true }))
     )
   }

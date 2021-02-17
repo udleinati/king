@@ -1,12 +1,14 @@
-import { ActionReducer, ActionReducerMap, combineReducers } from '@ngrx/store';
-import { Datasource } from '../shared/types/datasource.type';
 import * as fromService from './service';
+import * as fromRoute from './route';
 
 export const reducers = {
+  services: fromService.services,
   service: fromService.service,
-  services: fromService.services
+
+  routes: fromRoute.routes,
 }
 
 export const effects = [
-  fromService.Effects
+  fromService.Effects,
+  fromRoute.Effects,
 ]

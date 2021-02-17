@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Resolve } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { KongService } from 'src/app/shared/services/kong.service';
+import { filter, take, tap } from 'rxjs/operators';
+import * as fromRoute from 'src/app/store/route';
 
 @Injectable()
 export class ServicePageRouteListResolve implements Resolve<Record<string, any>> {
-  constructor(
-    private readonly kongService: KongService
-  ) {}
+  constructor(private store: Store) {}
 
-  resolve(): Observable<any> {
-    return this.kongService.serviceRoutes('27efc991-1058-44fb-b17d-584a47031bec');
+  resolve(route: ActivatedRouteSnapshot): Observable<any> {
+    this.store.dispatch(new fromRoute.List(route.params.id))
+
+    return this.store.pipe(
+      select(fromRoute.getRoutesState),
+      filter(state => !state.isLoading && state.loaded),
+      take(1)
+    )
   }
 }

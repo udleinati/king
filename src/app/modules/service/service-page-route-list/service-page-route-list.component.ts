@@ -1,23 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { select } from '@ngrx/store';
+import { tap } from 'rxjs/operators';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
-import { KongService } from 'src/app/shared/services/kong.service';
-import { map } from "rxjs/operators";
-import { FormBuilder, Validators } from '@angular/forms';
+import { PageListExtend } from 'src/app/shared/components/page-list/page-list.extend';
+import * as fromRoute from 'src/app/store/route';
 
 @Component({
   providers:[ModalComponent],
   selector: 'app-service-page-route-list',
   templateUrl: './service-page-route-list.component.html',
 })
-export class ServicePageRouteListComponent implements OnInit {
-  routes$ = this.activatedRoute.data.pipe(
-    map((data) => data.routes)
-  );
+export class ServicePageRouteListComponent extends PageListExtend implements OnInit {
+  public list$ = this.store.pipe(select(fromRoute.getRoutesPayload));
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-  ) { }
-
-  ngOnInit() {}
+  public columns: string[] = ['name', 'hosts', 'paths', 'tags'];
+  public columnActions: string[] = ['delete'];
 }

@@ -9,7 +9,6 @@ import { AdminInternalLayoutComponent } from '../../layouts/admin-internal-layou
 import { ServicePageComponent } from './service-page/service-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceListComponent } from './service-list/service-list.component';
-import { KongDatePipe } from '../../shared/pipes/kong-date.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ComponentsModule } from '../../shared/components/components.module';
@@ -31,7 +30,6 @@ import { ServicePageRouteListComponent } from './service-page-route-list/service
     // components
     AdminInternalLayoutComponent,
 
-    KongDatePipe,
     ServiceListComponent,
     ServicePageComponent,
     ServicePageRouteListComponent,
