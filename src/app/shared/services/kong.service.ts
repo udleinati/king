@@ -17,7 +17,6 @@ export class KongService {
   }
 
   services() {
-    console.log('--services');
     return this.httpClient.get(`${this.urlBase}/services`, { responseType: 'json' }).pipe(
       map(e => camelCase(e, { deep: true }))
     )

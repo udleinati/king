@@ -12,6 +12,7 @@ import { LoadingService } from '../services/loading.service';
 import { SidebarInsideComponent } from './sidebar-inside/sidebar-inside.component';
 import { PageListComponent } from './page-list/page-list.component';
 import { KongDatePipe } from '../pipes/kong-date.pipe';
+import { PageContentComponent } from './page-content/page-content.component';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { KongDatePipe } from '../pipes/kong-date.pipe';
     KeepHtmlPipe,
     LoadingComponent,
     PageListComponent,
+    PageContentComponent,
 
     KongDatePipe,
   ],
@@ -39,6 +41,7 @@ import { KongDatePipe } from '../pipes/kong-date.pipe';
     ModalComponent,
     LoadingComponent,
     PageListComponent,
+    PageContentComponent,
   ],
   providers: [
     LoadingService,

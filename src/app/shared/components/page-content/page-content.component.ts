@@ -1,19 +1,12 @@
-// import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-// import { fuseAnimations } from '@fuse/animations';
-// import { Store } from '@ngrx/store';
-// import { IAppState } from 'app/store/app.state';
-// import { unbox } from 'ngrx-forms';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-// @Component({
-//   selector: 'app-page-content',
-//   templateUrl: './page-content.component.html',
-//   // tslint:disable-next-line: no-host-metadata-property
-//   host: { class: 'page-layout carded' },
-//   animations: fuseAnimations,
-//   changeDetection: ChangeDetectionStrategy.OnPush
-// })
+@Component({
+  selector: 'app-page-content',
+  templateUrl: './page-content.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
 export class PageContentComponent {
-  // implements OnInit {
+  @Input() headline: string;
   // @Input() formState: any;
   // @Input() objectName = 'undefined';
   // @Input() hideSave = false;

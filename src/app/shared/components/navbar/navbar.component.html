@@ -1,13 +1,26 @@
 <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
   <div class="container-fluid">
     <!-- Brand -->
+    <button class="btn btn-default btn-icon-only back-to-top" type="button" name="button">
+      <i class="ni ni-bold-left"></i>
+    </button>
+
+    <!-- <button class="btn btn-default back-to-top mr-4" type="button" name="button">
+      <span class="btn-inner--icon">
+        <i class="ni ni-bold-left"></i>
+      </span>
+      <span class="btn-inner--text">
+        Back
+      </span>
+    </button> -->
+
     <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" routerLinkActive="active" [routerLink]="['/dashboard']">{{getTitle()}}</a>
 
-    <a href="javascript:void(0)" [routerLink]="['services', 'new']" class="ml-3 btn btn-neutral">ADD NEW SERVICE</a>
+    <a href="javascript:void(0)" [routerLink]="['services', 'new']" class="ml-4 btn btn-outline-neutral">ADD NEW SERVICE</a>
 
     <!-- Form -->
     <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-      <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
+      <!-- <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
         <div class="input-group input-group-alternative">
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fas fa-search"></i></span>
@@ -15,10 +28,10 @@
           <input class="form-control" placeholder="Search" type="text" (focus)="focus = true"
           (blur)="focus = false">
         </div>
-      </div>
+      </div> -->
     </form>
     <!-- User -->
-    <ul class="navbar-nav align-items-center d-none d-md-flex">
+    <!-- <ul class="navbar-nav align-items-center d-none d-md-flex">
       <li class="nav-item" ngbDropdown placement="bottom-right">
         <a class="nav-link pr-0" role="button" ngbDropdownToggle>
           <div class="media align-items-center">
@@ -57,6 +70,6 @@
           </a>
         </div>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </nav>

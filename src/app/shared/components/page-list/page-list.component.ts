@@ -5,17 +5,12 @@ import { Actions } from '@ngrx/effects';
 import { ModalComponent } from '../modal/modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-// export interface PageDropEvent {
-//   action: string;
-//   previousIndex?: number;
-//   currentIndex?: number;
-// }
-
 @Component({
   selector: 'app-page-list',
   templateUrl: './page-list.component.html',
 })
 export class PageListComponent implements OnInit {
+  @Input() headline: string;
   @Input() columns: string[] = [];
   @Input() columnActions: string[] = [];
   @Input() list: any;

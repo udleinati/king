@@ -1,16 +1,7 @@
-<div class="card bg-secondary shadow">
-  <div class="card-header bg-white border-0">
-    <div class="row align-items-center">
-      <div class="col-8" >
-        <h3 class="mb-0" *ngIf="service$ | async as service">{{ service.name || 'Add a new service'}}</h3>
-      </div>
-    </div>
-  </div>
-
-  <app-page-list *ngIf="list$ | async as list"
-    classes="no-side-paddings"
-    [columns]="columns"
-    [columnActions]="columnActions"
-    [list]="list">
-  </app-page-list>
-</div>
+<app-page-list *ngIf="list$ | async as list"
+  classes="card bg-secondary shadow no-side-paddings"
+  headline="Service ..."
+  [columns]="columns"
+  [columnActions]="columnActions"
+  [list]="list">
+</app-page-list>
