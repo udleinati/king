@@ -58,7 +58,6 @@ export class KongService {
   // }
 
   routes(serviceId: string) {
-    console.log('routes---');
     const path = (serviceId) ? `/services/${serviceId}/routes` : '/routes';
 
     return this.httpClient.get(`${this.urlBase}${path}`, { responseType: 'json' }).pipe(

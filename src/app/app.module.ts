@@ -14,7 +14,7 @@ import { ComponentsModule } from './shared/components/components.module';
 import { KongService } from './shared/services/kong.service';
 import { LoadingInterceptor } from './interceptors/loading.interceptor'
 import { LoadingService } from './shared/services/loading.service';
-import { sidebarInsideService } from './shared/services/sidebar-inside.service';
+import { BarService } from './shared/services/bar.service';
 import { StoreModule } from '@ngrx/store';
 import { reducers, effects } from './store';
 import { EffectsModule } from '@ngrx/effects';
@@ -45,7 +45,7 @@ const APP_ID = 'king';
 
     KongService,
     LoadingService,
-    sidebarInsideService,
+    BarService,
   ],
   bootstrap: [AppComponent]
 })

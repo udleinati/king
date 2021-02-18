@@ -9,7 +9,7 @@ import { ModalComponent } from './modal/modal.component';
 import { KeepHtmlPipe } from '../pipes/keep-html.pipe';
 import { LoadingComponent } from './loading/loading.component';
 import { LoadingService } from '../services/loading.service';
-import { SidebarInsideComponent } from './sidebar-inside/sidebar-inside.component';
+import { SidebarInternalComponent } from './sidebar-internal/sidebar-internal.component';
 import { PageListComponent } from './page-list/page-list.component';
 import { KongDatePipe } from '../pipes/kong-date.pipe';
 import { PageContentComponent } from './page-content/page-content.component';
@@ -24,7 +24,7 @@ import { PageContentComponent } from './page-content/page-content.component';
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
-    SidebarInsideComponent,
+    SidebarInternalComponent,
     ModalComponent,
     KeepHtmlPipe,
     LoadingComponent,
@@ -37,7 +37,7 @@ import { PageContentComponent } from './page-content/page-content.component';
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
-    SidebarInsideComponent,
+    SidebarInternalComponent,
     ModalComponent,
     LoadingComponent,
     PageListComponent,

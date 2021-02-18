@@ -1,7 +1,7 @@
 <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
   <div class="container-fluid">
     <!-- Brand -->
-    <button class="btn btn-default btn-icon-only back-to-top" type="button" name="button">
+    <button *ngIf="barService.backToPath" [routerLink]="[barService.backToPath]" class="btn btn-default btn-icon-only back-to-top" type="button" name="button">
       <i class="ni ni-bold-left"></i>
     </button>
 
@@ -14,9 +14,9 @@
       </span>
     </button> -->
 
-    <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" routerLinkActive="active" [routerLink]="['/dashboard']">{{getTitle()}}</a>
+    <a *ngIf="barService.title" class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" routerLinkActive="active" [routerLink]="[barService.title.path]">{{ barService.title.title }}</a>
 
-    <a href="javascript:void(0)" [routerLink]="['services', 'new']" class="ml-4 btn btn-outline-neutral">ADD NEW SERVICE</a>
+    <a *ngIf="barService.topButton" href="javascript:void(0)" [routerLink]="[barService.topButton.path]" class="ml-4 btn btn-outline-neutral">{{ barService.topButton.title }}</a>
 
     <!-- Form -->
     <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">

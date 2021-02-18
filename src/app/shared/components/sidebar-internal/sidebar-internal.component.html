@@ -4,7 +4,7 @@
     <div class="collapse navbar-collapse"  id="sidenav-collapse-main">
       <!-- Navigation -->
       <ul class="navbar-nav">
-          <li *ngFor="let menuItem of sidebarInsideService.routes" class="{{menuItem.class}} nav-item">
+          <li *ngFor="let menuItem of barService.sidebarInternal" class="{{menuItem.class}} nav-item">
               <a routerLinkActive="active" [routerLink]="menuItem.path" class="nav-link" [routerLinkActiveOptions]="{exact:true}">
                   <i class="ni {{menuItem.icon}}"></i>
                   {{menuItem.title}}
