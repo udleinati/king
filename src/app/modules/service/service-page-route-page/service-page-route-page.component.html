@@ -1,0 +1,32 @@
+<app-page-content headline="Service ...">
+  <div class="card-body">
+    <form [formGroup]="pageForm" #form="ngForm" (ngSubmit)="onSubmit()">
+      <input type="hidden" id="id" formControlName="id">
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="name">Name</label>
+              <input type="text" id="name" class="form-control form-control-alternative" formControlName="name" [ngClass]="{'is-invalid': pageForm.controls.name.invalid}">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="tags">Tags</label>
+              <input type="email" id="tags" class="form-control form-control-alternative" formControlName="tags">
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label class="form-control-label" for="clientCertificate">Client Certificate</label>
+              <input type="text" id="clientCertificate" class="form-control form-control-alternative" formControlName="clientCertificate" [ngClass]="{'is-invalid': pageForm.controls.clientCertificate.invalid}">
+            </div>
+          </div>
+        </div> -->
+
+      <button type="submit" class="btn btn-default float-right" [disabled]="pageForm.invalid">Submit</button>
+    </form>
+  </div>
+</app-page-content>

@@ -1,7 +1,7 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mergeMap, switchMap, tap } from "rxjs/operators";
-import { EMPTY, throwError } from 'rxjs';
-import { Add, ADD, AddSuccess, Get, GET, GetSuccess, List, LIST, ListSuccess, UPDATE, Update, REMOVE, Remove, RemoveSuccess, UpdateSuccess } from "./route.actions";
+import { EMPTY } from 'rxjs';
+import { Get, GET, GetSuccess, List, LIST, ListSuccess } from "./route.actions";
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { KongService } from 'src/app/shared/services/kong.service';

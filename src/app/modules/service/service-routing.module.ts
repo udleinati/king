@@ -7,6 +7,8 @@ import { ServicePageResolve } from './service-page/service-page.resolve';
 import { ServiceListResolve } from './service-list/service-list.resolve';
 import { ServicePageRouteListComponent } from './service-page-route-list/service-page-route-list.component';
 import { ServicePageRouteListResolve } from './service-page-route-list/service-page-route-list.resolve';
+import { ServicePageRoutePageResolve } from './service-page-route-page/service-page-route-page.resolve';
+import { ServicePageRoutePageComponent } from './service-page-route-page/service-page-route-page.component';
 
 const routes: Routes = [
     {
@@ -40,6 +42,15 @@ const routes: Routes = [
               },
               runGuardsAndResolvers: 'always',
             },
+            {
+              path: ':id/routes/:routeId',
+              component: ServicePageRoutePageComponent,
+              resolve: {
+                service: ServicePageResolve,
+                route: ServicePageRoutePageResolve,
+              },
+              runGuardsAndResolvers: 'always',
+            },
         ]
     },
 ];
@@ -51,6 +62,7 @@ const routes: Routes = [
       ServiceListResolve,
       ServicePageResolve,
       ServicePageRouteListResolve,
+      ServicePageRoutePageResolve,
     ]
 })
 export class ServiceRoutingModule { }

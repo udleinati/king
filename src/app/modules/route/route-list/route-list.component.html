@@ -1,0 +1,11 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-5">
+</div>
+
+<app-page-list *ngIf="list$ | async as list"
+  classes="container-fluid mt--7"
+  [columns]="columns"
+  [columnActions]="columnActions"
+  [list]="list"
+  [fromStore]="fromStore"
+  [deleteMessage]="deleteMessage">
+</app-page-list>

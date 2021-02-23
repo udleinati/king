@@ -22,6 +22,10 @@ const routes: Routes =[
         path: '',
         loadChildren: './modules/service/service.module#ServiceModule'
       },
+      {
+        path: '',
+        loadChildren: './modules/route/route.module#RouteModule'
+      },
     ]
   }, {
     path: '**',

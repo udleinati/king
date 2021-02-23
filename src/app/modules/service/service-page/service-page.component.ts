@@ -59,8 +59,9 @@ export class ServicePageComponent extends PageContentExtend implements OnInit {
   }
 
   onSubmit() {
-    const value = this.pageForm.value;
+    const value = JSON.parse(JSON.stringify(this.pageForm.value));
     if (!value.clientCertificate) value.clientCertificate = null;
+    if (value.tags) value.tags = value.tags.map(e => (typeof e === 'string') ? e : e.value);
 
     if (value.id) {
       this.store.dispatch(new fromService.Update(value.id, value));

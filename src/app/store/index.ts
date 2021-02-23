@@ -6,6 +6,7 @@ export const reducers = {
   service: fromService.service,
 
   routes: fromRoute.routes,
+  route: fromRoute.route,
 }
 
 export const effects = [

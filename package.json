@@ -46,6 +46,7 @@
     "core-js": "3.6.5",
     "express": "^4.15.2",
     "http-proxy-middleware": "^0.19.1",
+    "ngx-chips": "^2.2.2",
     "ngx-clipboard": "13.0.1",
     "ngx-toastr": "13.0.0",
     "nouislider": "14.6.2",

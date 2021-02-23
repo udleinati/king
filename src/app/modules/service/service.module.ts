@@ -13,11 +13,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ComponentsModule } from '../../shared/components/components.module';
 import { ServicePageRouteListComponent } from './service-page-route-list/service-page-route-list.component';
+import { ServicePageRoutePageComponent } from './service-page-route-page/service-page-route-page.component';
+import { TagInputModule } from 'ngx-chips';
 
 
 @NgModule({
   imports: [
     // modules (angular)
+    TagInputModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
@@ -33,6 +36,7 @@ import { ServicePageRouteListComponent } from './service-page-route-list/service
     ServiceListComponent,
     ServicePageComponent,
     ServicePageRouteListComponent,
+    ServicePageRoutePageComponent,
   ],
 })
 export class ServiceModule { }

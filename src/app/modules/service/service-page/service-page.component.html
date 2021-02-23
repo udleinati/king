@@ -12,8 +12,9 @@
           </div>
           <div class="col-lg-6">
             <div class="form-group">
-              <label class="form-control-label" for="tags">Tags</label>
-              <input type="email" id="tags" class="form-control form-control-alternative" formControlName="tags">
+              <label class="form-control-label mr-2" for="tags">Tags</label>
+              <tag-input formControlName="tags" [editable]="true"></tag-input>
+              <!-- <input type="email" id="tags" class="form-control form-control-alternative" formControlName="tags"> -->
             </div>
           </div>
         </div>
