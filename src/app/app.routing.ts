@@ -16,15 +16,15 @@ const routes: Routes =[
     children: [
       {
         path: '',
-        loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+        loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule),
       },
       {
         path: '',
-        loadChildren: './modules/service/service.module#ServiceModule'
+        loadChildren: () => import('./modules/service/service.module').then(m => m.ServiceModule),
       },
       {
         path: '',
-        loadChildren: './modules/route/route.module#RouteModule'
+        loadChildren: () => import('./modules/route/route.module').then(m => m.RouteModule),
       },
     ]
   }, {
