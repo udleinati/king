@@ -1,30 +1,85 @@
-<app-page-content headline="Service ...">
+<app-page-content *ngIf="service$ | async as service" headline="Service {{service.name}}">
   <div class="card-body">
     <form [formGroup]="pageForm" #form="ngForm" (ngSubmit)="onSubmit()">
       <input type="hidden" id="id" formControlName="id">
 
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="form-group">
-              <label class="form-control-label" for="name">Name</label>
-              <input type="text" id="name" class="form-control form-control-alternative" formControlName="name" [ngClass]="{'is-invalid': pageForm.controls.name.invalid}">
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="form-group">
-              <label class="form-control-label" for="tags">Tags</label>
-              <input type="email" id="tags" class="form-control form-control-alternative" formControlName="tags">
-            </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label class="form-control-label" for="name">Name</label>
+            <input type="text" id="name" class="form-control form-control-alternative" formControlName="name" [ngClass]="{'is-invalid': pageForm.controls.name.invalid}">
           </div>
         </div>
-        <!-- <div class="row">
-          <div class="col-lg-12">
-            <div class="form-group">
-              <label class="form-control-label" for="clientCertificate">Client Certificate</label>
-              <input type="text" id="clientCertificate" class="form-control form-control-alternative" formControlName="clientCertificate" [ngClass]="{'is-invalid': pageForm.controls.clientCertificate.invalid}">
-            </div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label class="form-control-label mr-2" for="tags">Tags</label>
+            <tag-input formControlName="tags" [editable]="true"></tag-input>
           </div>
-        </div> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label class="form-control-label" for="hosts">Hosts</label>
+            <tag-input formControlName="hosts" [editable]="true"></tag-input>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label class="form-control-label mr-2" for="paths">Paths</label>
+            <tag-input formControlName="paths" [editable]="true"></tag-input>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <!-- <div class="form-group">
+            <label class="form-control-label" for="headers">Headers</label>
+            <tag-input formControlName="headers" [editable]="true"></tag-input>
+          </div> -->
+        </div>
+        <div class="col-lg-6">
+          <label class="form-control-label" for="methods">Methods</label>
+          <tag-input formControlName="methods">
+            <tag-input-dropdown
+              [appendToBody]="true"
+              [showDropdownIfEmpty]="true"
+              [autocompleteItems]="listMethods"
+              [identifyBy]="'value'"
+              [displayBy]="'value'">
+            </tag-input-dropdown>
+          </tag-input>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label class="form-control-label" for="pathHandling">Path Handling</label>
+            <span class="clearfix"></span>
+            <select id="pathHandling" class="form-control" formControlName="pathHandling">
+              <option value="v0">v0</option>
+              <option value="v1">v1</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <label class="form-control-label" for="stripPath">Strip Path</label>
+          <span class="clearfix"></span>
+          <label class="custom-toggle">
+            <input type="checkbox" id="stripPath" formControlName="stripPath">
+            <span class="custom-toggle-slider rounded-circle"></span>
+          </label>
+        </div>
+        <div class="col-lg-4">
+          <label class="form-control-label" for="preserveHost">Preserve Host</label>
+          <span class="clearfix"></span>
+          <label class="custom-toggle">
+            <input type="checkbox" id="stripPath" formControlName="preserveHost">
+            <span class="custom-toggle-slider rounded-circle"></span>
+          </label>
+        </div>
+      </div>
 
       <button type="submit" class="btn btn-default float-right" [disabled]="pageForm.invalid">Submit</button>
     </form>

@@ -16,19 +16,19 @@ import { takeUntil } from 'rxjs/operators';
 export class ServicePageRoutePageComponent extends PageContentExtend implements OnInit {
   public service$ = this.store.pipe(select(fromService.getServicePayload));
   public route$ = this.store.pipe(select(fromRoute.getRoutePayload));
+  public listMethods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'];
 
   pageForm = this.fb.group({
     id: [undefined],
     name: [null, Validators.required],
     tags: [undefined],
-    // host: [null, Validators.required],
-    // port: [null, Validators.required],
-    // path: [undefined],
-    // retries: [undefined],
-    // connectTimeout: [undefined],
-    // writeTimeout: [undefined],
-    // readTimeout: [undefined],
-    // clientCertificate: [undefined],
+    hosts: [null],
+    paths: [undefined],
+    // headers: [undefined],
+    methods: [undefined],
+    pathHandling: [undefined],
+    stripPath: [undefined],
+    preserveHost: [undefined],
   })
 
   async ngOnInit() {
@@ -48,20 +48,21 @@ export class ServicePageRoutePageComponent extends PageContentExtend implements 
         id: e.id,
         name: e.name,
         tags: e.tags,
-        // host: e.host,
-        // port: e.port,
-        // path: e.path,
-        // retries: e.retries,
-        // connectTimeout: e.connectTimeout,
-        // writeTimeout: e.writeTimeout,
-        // readTimeout: e.readTimeout,
-        // clientCertificate: e.clientCertificate,
+        hosts: e.hosts,
+        paths: e.paths,
+        // headers: e.headers,
+        methods: e.methods,
+        // https://docs.konghq.com/gateway-oss/2.0.x/admin-api/#route-object
+        pathHandling: e.pathHandling,
+        stripPath: e.stripPath,
+        preserveHost: e.preserveHost,
       })
     })
   }
 
   onSubmit() {
-    // const value = this.pageForm.value;
+    const value = this.pageForm.value;
+    console.log(value);
     // if (!value.clientCertificate) value.clientCertificate = null;
 
     // if (value.id) {

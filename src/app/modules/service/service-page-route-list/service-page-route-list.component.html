@@ -1,7 +1,11 @@
-<app-page-list *ngIf="list$ | async as list"
-  classes="card bg-secondary shadow no-side-paddings"
-  headline="Service ..."
-  [columns]="columns"
-  [columnActions]="columnActions"
-  [list]="list">
-</app-page-list>
+<ng-container *ngIf="service$ | async as service">
+
+  <app-page-list *ngIf="list$ | async as list"
+    classes="card bg-secondary shadow no-side-paddings"
+    headline="Service {{service.name}}"
+    [columns]="columns"
+    [columnActions]="columnActions"
+    [list]="list">
+  </app-page-list>
+
+</ng-container>

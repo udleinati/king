@@ -1,8 +1,7 @@
-<app-page-content headline="Service ...">
+<app-page-content [headline]="(pageForm.controls.id.value) ? 'Service ' + pageForm.controls.name.value : 'New Service'">
   <div class="card-body">
     <form [formGroup]="pageForm" #form="ngForm" (ngSubmit)="onSubmit()">
       <input type="hidden" id="id" formControlName="id">
-
         <div class="row">
           <div class="col-lg-6">
             <div class="form-group">
@@ -14,7 +13,6 @@
             <div class="form-group">
               <label class="form-control-label mr-2" for="tags">Tags</label>
               <tag-input formControlName="tags" [editable]="true"></tag-input>
-              <!-- <input type="email" id="tags" class="form-control form-control-alternative" formControlName="tags"> -->
             </div>
           </div>
         </div>

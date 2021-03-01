@@ -39,6 +39,11 @@ export class ServicePageResolve implements Resolve<Record<string, any>>  {
             { path: `${basePath}/${route.params.id}`, title: 'Service',  icon:'ni-single-02', class: '' },
             { path: `${basePath}/${route.params.id}/routes`, title: 'Routes',  icon:'ni-world-2', class: '' },
           ];
+
+          if (route.params.routeId)
+            this.barService.sidebarInternal.push({
+              path: `${basePath}/${route.params.id}/routes/${route.params.routeId}`, title: 'Route',  icon:'ni-world-2', class: ''
+            })
         }
 
         else {
